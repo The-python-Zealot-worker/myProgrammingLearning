@@ -1,0 +1,34 @@
+# This module aims to link and list the contents of two or more folders together using Nodes. Hopefully, you can understand it by looking at it. if you don't, I will explain it in the comments. 
+
+import os
+
+class folderNodes:
+	madeFolders = 0
+	
+	def __init__(self, currentFolder, folderName, nextFolder=None):
+		self.currentFolder = currentFolder
+		self.nextFolder = nextFolder
+		self.folderName = folderName
+		folderNodes.madeFolders += 1
+	
+	def listingAFolderContents(self):
+		for i in os.listdir(self.currentFolder):
+			print(f"{self.folderName}: {i}")
+	
+	@staticmethod
+	def linkingAndListingFolderContent(*folderObjects):
+		for i in range(0, len(folderObjects)-1):
+			folderObjects[i].nextFolder = folderObjects[i+1] 
+			""" The line behind the quotes does this: folderOne.nextFolder = folderTwo, folderTwo.nextFolder = folderThree, and so on. It helps me and others who want to use this code not to have to that repetive action."""
+			
+		# This variable points to pretty much every folder in the folderObject argument
+		folderPointer = folderObjects[i]
+		
+		while folderPointer:
+			folderPointer.listingAFolderContents()
+			folderPointer = folderPointer.nextFolder
+
+folderOne = folderNodes(f"{os.getcwd()}/TestFolderOne", "Folder One")
+folderTwo = folderNodes(f"{os.getcwd()}/TestFolderTwo", "Folder Two")
+
+folderNodes.linkingAndListingFolderContent(folderOne, folderTwo)
