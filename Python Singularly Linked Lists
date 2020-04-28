@@ -1,0 +1,45 @@
+#This Class make instances that have a value that can point to the memory address of another value. That is not the most accurate, but it is somewhat close.
+class Nodes:
+	def __init__(self, currentValue, nextValue=None):
+		self.currentValue = currentValue
+		self.nextValue = nextValue
+
+# The Class below create lists that are linked together via links. 
+class SLinkedLists:
+	def __init__(self, headValue=None):
+		self.headValue = headValue
+	
+	def insertBeginningNode(self, newNode):
+		newNode = Nodes(newNode)
+		newNode.nextValue = self.headValue
+		self.headValue = newNode
+	
+	def linkingAllTheNodes(self, *nodeObjects):
+		try:
+			self.headValue = nodeObjects[0]
+			self.headValue.nextValue = nodeObjects[1]
+		except IndexError:
+			pass
+		else:
+			for i in range(1, len(nodeObjects)-1):
+				nodeObjects[i].nextValue = nodeObjects[i+1]
+	
+	def printingNodesToConsole(self):
+		thePointerValue = self.headValue
+		while thePointerValue:
+			print(thePointerValue.currentValue)
+			thePointerValue = thePointerValue.nextValue
+
+groupOfPeople = SLinkedLists()
+
+Africans = Nodes("Africans")
+Americans = Nodes("Americans")
+Asians = Nodes("Asians")
+Indians = Nodes("Indians")
+Africans_Americans = Nodes("African Americans")
+
+groupOfPeople.linkingAllTheNodes(Africans, Americans, Asians, Indians)
+
+groupOfPeople.insertBeginningNode(Africans_Americans.currentValue)
+
+groupOfPeople.printingNodesToConsole()
