@@ -1,0 +1,21 @@
+import random
+
+def calRandomSquareAreas(aSquareSide): #cal means caluating
+	squareAreaList = []
+	
+	for _ in range(1, random.randint(2, 100)):
+		squareAreaList.append(aSquareSide())
+	
+	def printingElesOfList():
+		for randomNums in squareAreaList:
+			print(f"{randomNums/2:.0f} times 2 equals {randomNums}")
+			
+		return 
+	
+	return printingElesOfList
+
+@calRandomSquareAreas
+def randomSquareForumla():
+	return random.randint(1, 100) * 2
+
+randomSquareForumla()
